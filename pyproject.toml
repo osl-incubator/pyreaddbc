@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "pyreaddbc"
+version = "1.0.0"  # semantic-release
+description = "pyreaddbc"
+authors = ["Flavio Codeco Coelho <fccoelho@gmail.com>", "Sandro Loch <es.loch@gmail.com>"]
+license = "AGPL-3.0"
+
+
+include = [
+    {path = "bin/_readdbc.so", format = "wheel"}
+]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0", "cffi"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.build]
+script = "./build.py"
+generate-setup-file = false
+
+[tool.black]
+line-length = 79
+skip-string-normalization = true
+target-version = ["py37", "py38", "py39"]
+exclude = "docs/"
