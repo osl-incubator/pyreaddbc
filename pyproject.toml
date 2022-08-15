@@ -17,7 +17,7 @@ packages = [
 
 [tool.poetry.build]
 script = "pyreaddbc/_build_readdbc.py"
-generate-setup-file = true
+generate-setup-file = false
 
 [tool.poetry.dependencies]
 python = "^3.9"

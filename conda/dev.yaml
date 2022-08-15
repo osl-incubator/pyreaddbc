@@ -8,3 +8,4 @@ dependencies:
   - gcc
   - make
   - pip
+  - poetry
