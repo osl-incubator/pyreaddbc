@@ -6,8 +6,6 @@ license: GPL V3 or Later
 import os
 
 from cffi import FFI
-import shutil
-from pathlib import Path
 
 ffibuilder = FFI()
 
@@ -17,7 +15,7 @@ ROOT_PATH = os.path.dirname(pyreaddbc_PATH)
 
 with open(os.path.join(pyreaddbc_PATH, "c-src/dbc2dbf.c"), "r") as f:
     ffibuilder.set_source(
-        "_readdbc",
+        "pyreaddbc._readdbc",
         f.read(),
         libraries=["c"],
         sources=[os.path.join(pyreaddbc_PATH, "c-src/blast.c")],
@@ -34,7 +32,7 @@ ffibuilder.cdef(
 with open(os.path.join(pyreaddbc_PATH, "c-src/blast.h")) as f:
     ffibuilder.cdef(f.read(), override=True)
 
-
+print(f"{pyreaddbc_PATH}/_readdbc.so")
 if __name__ == "__main__":
     ffibuilder.compile(
         tmpdir=".",
@@ -42,4 +40,3 @@ if __name__ == "__main__":
         verbose=True,
         debug=True,
     )
-    shutil.move(Path(ROOT_PATH) / "_readdbc*.so", pyreaddbc_PATH)

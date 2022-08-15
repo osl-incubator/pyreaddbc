@@ -4,8 +4,6 @@ channels:
   - nodefaults
 dependencies:
   - cffi
-  - docker-compose
   - gcc
-  - make
   - pip
   - poetry

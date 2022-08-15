@@ -7,7 +7,7 @@ license = "AGPL-3.0"
 
 
 include = [
-    {path = "pyreaddbc/bin/_readdbc.so"}
+    {path = "pyreaddbc/_readdbc.so"}
 ]
 
 packages = [
@@ -32,8 +32,9 @@ isort = "^5.10.1"
 flake8 = "^5.0.4"
 
 [build-system]
-requires = ["cffi>=1.0.0", "setuptools>26.0.0"]
-build-backend = "setuptools.build_meta"
+requires = [
+    "poetry-core>=1.0.0", "setuptools>=41.0.0", "wheel", "cffi"]
+build-backend = "poetry.core.masonry.api"
 
 
 [tool.black]

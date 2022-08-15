@@ -1026,13 +1026,13 @@ _cffi_pypyinit__readdbc(const void *p[])
 PyMODINIT_FUNC
 PyInit__readdbc(void)
 {
-  return _cffi_init("_readdbc", 0x2601, &_cffi_type_context);
+  return _cffi_init("pyreaddbc._readdbc", 0x2601, &_cffi_type_context);
 }
 #else
 PyMODINIT_FUNC
 init_readdbc(void)
 {
-  _cffi_init("_readdbc", 0x2601, &_cffi_type_context);
+  _cffi_init("pyreaddbc._readdbc", 0x2601, &_cffi_type_context);
 }
 #endif
 
