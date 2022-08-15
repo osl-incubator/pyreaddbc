@@ -1,0 +1,51 @@
+default_language_version:
+  python: python3.9
+
+default_stages: [commit, push]
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.5.0
+    hooks:
+      - id: end-of-file-fixer
+        exclude: LICENSE
+
+  - repo: local
+    hooks:
+    - entry: black
+      exclude: ^$
+      files: ""
+      id: black
+      language: system
+      name: black
+      pass_filenames: true
+      stages:
+        - commit
+      types:
+        - python
+        - file
+        - python
+      types_or: []
+    - entry: flake8
+      exclude: ^$
+      files: ""
+      id: flake8
+      language: python
+      name: flake8
+      pass_filenames: true
+      stages:
+        - commit
+      types:
+        - python
+      types_or: []
+    - entry: isort
+      exclude: "^.*/js/.*$"
+      files: ""
+      id: isort
+      language: python
+      name: isort
+      pass_filenames: true
+      stages:
+        - commit
+      types:
+        - python

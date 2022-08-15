@@ -13,9 +13,9 @@ from dbfread import DBF
 from tqdm import tqdm
 
 try:
-    from pysus.utilities._readdbc import ffi, lib
+    from pyreaddbc._readdbc import ffi, lib
 except (ImportError, ModuleNotFoundError):
-    from _readdbc import ffi, lib
+    from ._readdbc import ffi, lib
 
 
 def read_dbc(filename, encoding="utf-8", raw=False):

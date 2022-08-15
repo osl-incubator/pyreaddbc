@@ -1,10 +1,7 @@
 from distutils.command.build_ext import build_ext
 from distutils.core import Extension
-from distutils.errors import (  # noqa E501
-    CCompilerError,
-    DistutilsExecError,
-    DistutilsPlatformError,
-)
+from distutils.errors import DistutilsExecError  # noqa E501
+from distutils.errors import CCompilerError, DistutilsPlatformError
 from pathlib import Path
 
 BASE_DIR = Path().resolve()
@@ -44,6 +41,7 @@ class ExtBuilder(build_ext):
             raise BuildFailed("Could not compile C extension.")
 
 
+# raise Exception()
 def build(setup_kwargs):
     """
     This function is mandatory in order to build the extensions.

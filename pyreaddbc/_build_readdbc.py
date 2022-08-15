@@ -33,5 +33,8 @@ with open(os.path.join(pyreaddbc_PATH, "c-src/blast.h")) as f:
 
 if __name__ == "__main__":
     ffibuilder.compile(
-        tmpdir="/tmp/pyreaddbc", target=f"{ROOT_PATH}/bin/_readdbc.so", verbose=True, debug=True
+        tmpdir="/tmp/pyreaddbc",
+        target=f"{pyreaddbc_PATH}/bin/_readdbc.so",
+        verbose=True,
+        debug=True,
     )

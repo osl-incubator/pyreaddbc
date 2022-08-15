@@ -8,5 +8,3 @@ dependencies:
   - gcc
   - make
   - pip
-  - psycopg2
-  - r-base

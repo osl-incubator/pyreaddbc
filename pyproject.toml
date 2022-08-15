@@ -7,21 +7,34 @@ license = "AGPL-3.0"
 
 
 include = [
-    {path = "bin/_readdbc.so", format = "wheel"}
+    {path = "pyreaddbc/bin/_readdbc.so"}
 ]
+
+packages = [
+    { include = "pyreaddbc" },
+]
+
+
+[tool.poetry.build]
+script = "pyreaddbc/_build_readdbc.py"
+generate-setup-file = true
 
 [tool.poetry.dependencies]
 python = "^3.9"
+pandas = "^1.4.3"
+dbfread = "^2.0.7"
+tqdm = "^4.64.0"
+cffi = "^1.15.1"
 
 [tool.poetry.dev-dependencies]
+black = "^22.6.0"
+isort = "^5.10.1"
+flake8 = "^5.0.4"
 
 [build-system]
-requires = ["poetry-core>=1.0.0", "cffi"]
-build-backend = "poetry.core.masonry.api"
+requires = ["cffi>=1.0.0", "setuptools>26.0.0"]
+build-backend = "setuptools.build_meta"
 
-[tool.poetry.build]
-script = "./build.py"
-generate-setup-file = false
 
 [tool.black]
 line-length = 79
