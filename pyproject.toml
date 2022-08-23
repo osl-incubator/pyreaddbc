@@ -30,6 +30,7 @@ cffi = "^1.15.1"
 black = "^22.6.0"
 isort = "^5.10.1"
 flake8 = "^5.0.4"
+pre-commit = "^2.20.0"
 
 [build-system]
 requires = [
