@@ -3,12 +3,12 @@ import unittest
 
 import pandas as pd
 
-from . import read_dbc_dbf
+from pyreaddbc.readdbc import read_dbc_dbf
 
 PATH_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 
-class TestReadDbcToDBF(unittest.TestCase):
+class TestPyReadDbc(unittest.TestCase):
     def test_read_dbc_dbf(self):
 
         dbc_name = PATH_ROOT + "/" + "data" + "/" + "ZIKABR16.DBC"

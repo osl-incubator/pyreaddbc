@@ -20,7 +20,7 @@ except (ImportError, ModuleNotFoundError):
 
 def read_dbc(filename, encoding="utf-8", raw=False):
     """
-    Opens a DATASUS .dbc file and return its contents as a pandas
+    Opens a DBC file and return its contents as a pandas
     Dataframe.
     :param filename: .dbc filename
     :param encoding: encoding of the data
@@ -45,7 +45,7 @@ def read_dbc(filename, encoding="utf-8", raw=False):
 
 def dbc2dbf(infile, outfile):
     """
-    Converts a DATASUS dbc file to a DBF database saving it to `outfile`.
+    Converts a DBC file to a DBF database saving it to `outfile`.
     :param infile: .dbc file name
     :param outfile: name of the .dbf file to be created.
     """
@@ -58,18 +58,14 @@ def dbc2dbf(infile, outfile):
 
     lib.dbc2dbf([p], [q])
 
-    # print(os.path.exists(outfile))
-
 
 def read_dbc_dbf(filename: str):
     if filename.endswith(("dbc", "DBC")):
         df = read_dbc(filename, encoding="iso-8859-1")
     elif filename.endswith(("DBF", "dbf")):
         dbf = DBF(filename, encoding="iso-8859-1")
-        # dbf = gpd.read_file(
-        # filename, encoding="iso-8859-1"
-        # ).drop("geometry", axis=1)
         df = pd.DataFrame(list(dbf))
+
     return df
 
 
