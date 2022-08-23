@@ -1,14 +1,42 @@
 name: Release
-
 on:
-  workflow_dispatch:
-
+  push:
+    branches:
+      - main
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    defaults:
+      run:
+        shell: bash -l {0}
+
+    concurrency:
+      group: ci-${{ github.ref }}
+      cancel-in-progress: true
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          miniconda-version: "latest"
+          mamba-version: "*"
+          environment-file: conda/dev.yaml
+          channels: conda-forge,nodefaults
+          activate-environment: semantic-release
+          use-mamba: true
+          miniforge-variant: Mambaforge
+
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Install deps
         run: poetry install
       - run: |
