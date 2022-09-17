@@ -1,10 +1,17 @@
+[tool.poetry.build]
+script = "pyreaddbc/_build_readdbc.py"
+generate-setup-file = false
+
 [tool.poetry]
 name = "pyreaddbc"
 version = "1.0.0"  # semantic-release
-description = "pyreaddbc"
+description = "pyreaddbc package"
+readme = "README.md"
+
 authors = ["Flavio Codeco Coelho <fccoelho@gmail.com>", "Sandro Loch <es.loch@gmail.com>"]
 license = "AGPL-3.0"
-
+repository = "https://github.com/osl-incubator/pyreaddbc"
+homepage = "https://github.com/osl-incubator/pyreaddbc"
 
 include = [
     {path = "pyreaddbc/_readdbc.so"}
@@ -13,11 +20,6 @@ include = [
 packages = [
     { include = "pyreaddbc" },
 ]
-
-
-[tool.poetry.build]
-script = "pyreaddbc/_build_readdbc.py"
-generate-setup-file = false
 
 [tool.poetry.dependencies]
 python = "^3.9"
