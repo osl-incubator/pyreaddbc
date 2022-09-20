@@ -9,7 +9,7 @@ generate-setup-file = false
 
 [tool.poetry]
 name = "pyreaddbc"
-version = "1.0.0"  # semantic-release
+version = "1.0.0"  # changed by semantic-release
 description = "pyreaddbc package"
 readme = "README.md"
 authors = ["Flavio Codeco Coelho <fccoelho@gmail.com>", "Sandro Loch <es.loch@gmail.com>"]

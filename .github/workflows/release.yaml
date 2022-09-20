@@ -1,17 +1,26 @@
-name: release
+name: Release
 
 on: [workflow_dispatch]
 
 jobs:
-  build:
+  release:
+    name: Release
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     defaults:
       run:
         shell: bash -l {0}
 
+    concurrency:
+      group: ci-${{ github.ref }}
+      cancel-in-progress: true
+
     steps:
-    - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
     - uses: conda-incubator/setup-miniconda@v2
       with:
