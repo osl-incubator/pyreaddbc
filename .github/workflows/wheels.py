@@ -25,7 +25,7 @@ jobs:
         # env:
         #   CIBW_SOME_OPTION: value
         env:
-            CIBW_BUILD: cp39-*
+            CIBW_BUILD: cp39-* cp310-*
 
       - uses: actions/upload-artifact@v3
         with:
