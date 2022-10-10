@@ -597,7 +597,7 @@ static void (*_cffi_call_python_org)(struct _cffi_externpy_s *, char *);
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+//#include <unistd.h>
 #include <errno.h>
 #include <string.h>
 #include <stdint.h>
