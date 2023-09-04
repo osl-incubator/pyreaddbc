@@ -53,6 +53,9 @@ flake8 = ">=5.0.4"
 pre-commit = ">=2.20.0"
 pytest = ">=7.1.2"
 commitizen = ">=2.32.2"
+pysus = { git = "https://github.com/AlertaDengue/pysus.git", branch = "main" }
+chardet = ">=5.2.0"
+
 
 [tool.black]
 line-length = 79
