@@ -1,6 +1,11 @@
 name: Release
 on:
-  - workflow_dispatch
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
 jobs:
   release:
     name: Release
@@ -27,6 +32,7 @@ jobs:
           use-mamba: true
           miniforge-variant: Mambaforge
       - name: Release
+        if: ${{ github.event_name != 'workflow_dispatch' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PYPI_TOKEN: ${{ secrets.PYPITOKENPYREADDBC }}
