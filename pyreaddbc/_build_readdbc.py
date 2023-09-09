@@ -6,20 +6,22 @@ license: GPL V3 or Later
 import os
 
 from cffi import FFI
+from pathlib import Path
 
 ffibuilder = FFI()
 
+PROJECT_PATH = Path(__file__).parent.parent
+PACKAGE_ABS_PATH = Path(__file__).parent
+PACKAGE_REL_PATH = PACKAGE_ABS_PATH.relative_to(PROJECT_PATH)
 
-pyreaddbc_PATH = os.path.dirname(__file__)
-ROOT_PATH = os.path.dirname(pyreaddbc_PATH)
-
-with open(os.path.join(pyreaddbc_PATH, "c-src/dbc2dbf.c"), "r") as f:
+with open(PACKAGE_ABS_PATH / "c-src" / "dbc2dbf.c", "r") as f:
     ffibuilder.set_source(
-        "pyreaddbc._readdbc",
-        f.read(),
+        module_name="pyreaddbc._readdbc",
+        source=f.read(),
+        source_extension=".c",
         libraries=["c"],
-        sources=[os.path.join(pyreaddbc_PATH, "c-src/blast.c")],
-        include_dirs=[os.path.join(pyreaddbc_PATH, "c-src/")],
+        sources=[str(PACKAGE_REL_PATH / "c-src" / "blast.c")],
+        include_dirs=[str(PACKAGE_REL_PATH / "c-src")],
     )
 ffibuilder.cdef(
     """
@@ -29,14 +31,14 @@ ffibuilder.cdef(
     """
 )
 
-with open(os.path.join(pyreaddbc_PATH, "c-src/blast.h")) as f:
+with open(PACKAGE_ABS_PATH / "c-src" / "blast.h") as f:
     ffibuilder.cdef(f.read(), override=True)
 
-print(f"{pyreaddbc_PATH}/_readdbc.so")
+
 if __name__ == "__main__":
     ffibuilder.compile(
-        tmpdir=".",
-        target=f"{pyreaddbc_PATH}/_readdbc.so",
+        # tmpdir=str(),
+        target="_readdbc.so",
         verbose=True,
         debug=True,
     )
