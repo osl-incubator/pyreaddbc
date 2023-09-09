@@ -32,7 +32,7 @@ jobs:
           use-mamba: true
           miniforge-variant: Mambaforge
       - name: Release
-        if: ${{ github.event_name != 'workflow_dispatch' }}
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PYPI_TOKEN: ${{ secrets.PYPITOKENPYREADDBC }}

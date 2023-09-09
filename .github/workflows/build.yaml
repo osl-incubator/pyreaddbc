@@ -31,7 +31,6 @@ jobs:
           miniforge-variant: Mambaforge
       - name: Install dependencies
         run: |
-          poetry config experimental.new-installer false
           poetry config virtualenvs.create false
           poetry build
           poetry install
