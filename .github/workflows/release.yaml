@@ -15,7 +15,7 @@ jobs:
       run:
         shell: bash -l {0}
     concurrency:
-      group: ci-${{ github.ref }}
+      group: ci-release-${{ github.ref }}
       cancel-in-progress: true
     steps:
       - name: Checkout

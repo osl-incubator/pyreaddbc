@@ -13,7 +13,7 @@ jobs:
         python-version:
           - "3.9"
     concurrency:
-      group: ci-${{ github.ref }}
+      group: ci-build-${{ github.ref }}
       cancel-in-progress: true
     defaults:
       run:
