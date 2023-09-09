@@ -26,6 +26,8 @@ classifiers = [  #! Update me
   "License :: OSI Approved :: GNU Affero General Public License AGPL-3.0",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
 ]
 
 include = [
@@ -37,23 +39,23 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.9"
-pandas = "^1.4.3"
-dbfread = "^2.0.7"
-tqdm = "^4.64.0"
-cffi = "^1.15.1"
-flake8 = "^5.0.4"
+python = ">=3.9,<4"
+pandas = ">=1.4.3,<2"
+dbfread = ">=2.0.7,<3"
+tqdm = ">=4.64.0,<5"
+cffi = ">=1.15.1,<2"
+pyyaml = ">=6"
 
 [tool.poetry.dev-dependencies]
-black = "^22.6.0"
-isort = "^5.10.1"
-flake8 = "^5.0.4"
-pre-commit = "^2.20.0"
-pytest = "^7.1.2"
-commitizen = "^2.32.2"
+black = ">=22.6.0"
+isort = ">=5.10.1"
+flake8 = ">=5.0.4"
+pre-commit = ">=2.20.0"
+pytest = ">=7.1.2"
+commitizen = ">=2.32.2"
 
 [tool.black]
 line-length = 79
 skip-string-normalization = true
-target-version = ["py37", "py38", "py39"]
+target-version = ["py39", "py310", "py311"]
 exclude = "docs/"
