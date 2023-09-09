@@ -113,6 +113,8 @@ void dbc2dbf(char** input_file, char** output_file) {
         return;
     }
 
+    buf[header-1] = 0x0D;
+
     ret = fwrite(buf, 1, header, output);
     if( ferror(output) ) {
         printf("Error writing output file %s: %s", output_file[0], strerror(errno));

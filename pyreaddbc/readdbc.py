@@ -18,7 +18,7 @@ except (ImportError, ModuleNotFoundError):
     from ._readdbc import ffi, lib
 
 
-def read_dbc(filename, encoding="utf-8", raw=False):
+def read_dbc(filename, encoding="iso-8859-1", raw=False):
     """
     Opens a DBC file and return its contents as a pandas
     Dataframe.
