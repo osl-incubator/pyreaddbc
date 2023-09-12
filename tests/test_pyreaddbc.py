@@ -86,10 +86,10 @@ def test_dbc_file_header(db_test):
             or header[8:12] != b'\x01\x00\x00\x00'
         ):
             print(f"Error: {dbc_file} is not a valid DBC file.")
-            return False
+            assert False
 
     print(f"{dbc_file} is a valid DBC file.")
-    return True
+    assert True
 
 
 def assert_dataframe_valid(df):
