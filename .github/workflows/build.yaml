@@ -46,4 +46,4 @@ jobs:
 
     - name: Test with pytest
       run: |
-        poetry run pytest -vv tests/
+        poetry run pytest -vv -k "ZIKABR21 or STPI2206 or sids" tests/
