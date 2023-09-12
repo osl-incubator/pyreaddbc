@@ -80,7 +80,7 @@ def test_dbc_file_header(db_test):
         valid_headers = [
             (b'\x03{\x08\x07', b'\xe1\x04\x9c\x00'),
             (b'\x03z\x07\x0c', b'!\x1a\xf3\x01'),
-            (b'\x03g\x06\x11', b'\xe1\x01\xa8\x01'),
+            (b'\x03g\x06\x11', b'\xe1\x01\xa8\x00'),
         ]
         is_valid = any(
             len(header) == 32 and header[0:4] == h[0] and header[8:12] == h[1]
