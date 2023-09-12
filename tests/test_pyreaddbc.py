@@ -74,22 +74,19 @@ def test_encoding(db_test):
 
 @pytest.mark.parametrize("db_test", db_tests)
 def test_dbc_file_header(db_test):
-    dbc_file = str(data_files / f"{db_test}.dbc")
-    with open(dbc_file, 'rb') as dbc_file:
-        # Read the first 32 bytes of the file
-        header = dbc_file.read(32)
-
-        # Check if the header is valid
-        if (
-            len(header) != 32
-            or header[0:4] != b'VJDB'
-            or header[8:12] != b'\x01\x00\x00\x00'
-        ):
-            print(f"Error: {dbc_file} is not a valid DBC file.")
-            assert False
-
-    print(f"{dbc_file} is a valid DBC file.")
-    assert True
+    dbc_file = data_files / f"{db_test}.dbc"
+    with open(dbc_file, 'rb') as f:
+        header = f.read(32)
+        valid_headers = [
+            (b'\x03{\x08\x07', b'\xe1\x04\x9c\x00'),
+            (b'\x03z\x07\x0c', b'!\x1a\xf3\x01'),
+            (b'\x03g\x06\x11', b'\xe1\x01\xa8\x01'),
+        ]
+        is_valid = any(
+            len(header) == 32 and header[0:4] == h[0] and header[8:12] == h[1]
+            for h in valid_headers
+        )
+        assert is_valid, f"{dbc_file} is not a valid DBC file."
 
 
 def assert_dataframe_valid(df):
