@@ -133,3 +133,8 @@ dmypy.json
 
 # docs
 notebooks_tmp/
+
+# database
+*.dbf
+*.dbc
+*.csv.gz
