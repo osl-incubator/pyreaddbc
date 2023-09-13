@@ -11,6 +11,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      PYPI_TOKEN: ${{ secrets.PYPIPYREADDBCTOKEN }}
+
     defaults:
       run:
         shell: bash -l {0}
@@ -42,7 +46,7 @@ jobs:
       if: ${{ github.event_name == 'workflow_dispatch' }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        PYPI_TOKEN: ${{ secrets.PYREADDBC_PUBLISHABLE_KEY }}
+        PYPI_TOKEN: ${{ secrets.PYPIPYREADDBCTOKEN }}
       run: |
         poetry config pypi-token.pypi ${PYPI_TOKEN}
         make release
