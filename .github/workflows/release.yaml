@@ -11,10 +11,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      PYPI_TOKEN: ${{ secrets.PYPIPYREADDBCTOKEN }}
-
     defaults:
       run:
         shell: bash -l {0}
@@ -50,8 +46,3 @@ jobs:
       run: |
         poetry config pypi-token.pypi ${PYPI_TOKEN}
         make release
-
-    - name: Setup tmate session
-      if: "${{ failure() }}"
-
-      uses: mxschmitt/action-tmate@v3
