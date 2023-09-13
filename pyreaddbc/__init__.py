@@ -1,6 +1,8 @@
 """pyreaddbc Python package"""
 from importlib import metadata as importlib_metadata
 
+from .readdbc import *  # noqa F403
+
 
 def get_version() -> str:
     try:
