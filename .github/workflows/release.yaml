@@ -41,7 +41,7 @@ jobs:
     - name: Release
       if: ${{ github.event_name == 'workflow_dispatch' }}
       env:
-        GITHUB_TOKEN: ${{ secrets.PYREADDBC_SECRET_KEY }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         PYPI_TOKEN: ${{ secrets.PYREADDBC_PUBLISHABLE_KEY }}
       run: |
         poetry config pypi-token.pypi ${PYPI_TOKEN}
