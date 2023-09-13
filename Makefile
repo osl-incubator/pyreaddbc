@@ -52,6 +52,7 @@ clean-pyc: ## Remove Python file artifacts
 clean-test: ## Remove tests databases
 	@find ./ -name '*.dbf' -exec rm -f {} \;
 	@find ./ -name '*csv.gz' -exec rm -f {} \;
+	@find ./ -name '*.pytest_cache' -exec rm -rf {} \;
 
 
 .PHONY: release

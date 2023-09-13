@@ -9,7 +9,7 @@ generate-setup-file = false
 
 [tool.poetry]
 name = "pyreaddbc"
-version = "1.0.0"  # changed by semantic-release
+version = "1.1.0"  # changed by semantic-release
 description = "pyreaddbc package"
 readme = "README.md"
 authors = ["Flavio Codeco Coelho <fccoelho@gmail.com>", "Sandro Loch <es.loch@gmail.com>"]
@@ -23,7 +23,7 @@ classifiers = [  #! Update me
   "Intended Audience :: Developers",
   "Operating System :: OS Independent",
   "Topic :: Software Development :: Libraries :: Python Modules",
-  "License :: OSI Approved :: GNU Affero General Public License AGPL-3.0",
+  "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
@@ -53,7 +53,6 @@ flake8 = ">=5.0.4"
 pre-commit = ">=2.20.0"
 pytest = ">=7.1.2"
 commitizen = ">=2.32.2"
-pysus = { git = "https://github.com/AlertaDengue/pysus.git", branch = "main" }
 chardet = ">=5.2.0"
 
 
