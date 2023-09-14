@@ -1,4 +1,3 @@
-import gzip
 import os
 from pathlib import Path
 
@@ -6,7 +5,7 @@ import chardet
 import pandas as pd
 import pytest
 
-from pyreaddbc import dbc2dbf, dbf_to_csvgz, read_dbc, read_dbc_dbf
+from pyreaddbc import dbc2dbf, read_dbc, read_dbc_dbf
 
 path_root = Path(__file__).resolve().parent.parent
 data_files = path_root / "tests/data"
@@ -41,20 +40,6 @@ def test_read_dbc_dbf(db_test):
     dbc_file = str(data_files / f"{db_test}.dbc")
     df = read_dbc_dbf(dbc_file)
     assert_dataframe_valid(df)
-
-
-@pytest.mark.parametrize("db_test", db_tests)
-def test_dbf_to_csvgz(db_test):
-    temp_dbf_file = str(data_files / f"{db_test}.dbf")
-    temp_csvgz_file = str(data_files / f"{db_test}.csv.gz")
-    dbf_to_csvgz(temp_dbf_file, encoding='iso-8859-1')
-    assert os.path.isfile(temp_csvgz_file)
-    with gzip.open(temp_csvgz_file, "rt") as gzfile:
-        df = pd.read_csv(gzfile)
-    assert isinstance(df, pd.DataFrame)
-    assert not df.empty
-    assert len(df.columns) > 2
-    assert len(df) > 0
 
 
 @pytest.mark.parametrize("db_test", db_tests)

@@ -3,14 +3,11 @@ Created on 16/08/16
 by fccoelho
 license: GPL V3 or Later
 """
-import csv
-import gzip
 import os
 from tempfile import NamedTemporaryFile
 
 import pandas as pd
 from dbfread import DBF
-from tqdm import tqdm
 
 try:
     from pyreaddbc._readdbc import ffi, lib
@@ -67,25 +64,3 @@ def read_dbc_dbf(filename: str):
         df = pd.DataFrame(list(dbf))
 
     return df
-
-
-def dbf_to_csvgz(filename: str, encoding: str = "iso-8859-1"):
-    """
-    Streams a dbf file to gzipped CSV file. The Gzipped csv
-        will be saved on the same path but with a csv.gz extension.
-    :param filename: path to the dbf file
-    """
-    data = DBF(filename, encoding=encoding, raw=False)
-    fn = os.path.splitext(filename)[0] + ".csv.gz"
-
-    with gzip.open(fn, "wt") as gzf:
-        for i, d in tqdm(
-            enumerate(data),
-            desc="Converting",
-        ):
-            if i == 0:
-                csvwriter = csv.DictWriter(gzf, fieldnames=d.keys())
-                csvwriter.writeheader()
-                csvwriter.writerow(d)
-            else:
-                csvwriter.writerow(d)
