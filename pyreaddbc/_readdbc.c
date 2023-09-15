@@ -680,7 +680,7 @@ void dbc2dbf(char** input_file, char** output_file) {
         perror("");
         return;
     }
-    
+
     buf[header-1] = 0x0D;
 
     ret = fwrite(buf, 1, header, output);
