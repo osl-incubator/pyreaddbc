@@ -1,6 +1,6 @@
 # pyreaddbc
 
-**pyreaddbc** is a Python library for working with [DBase database file](https://docs.fileformat.com/database/dbf/). Legacy systems from the Brazilian Ministry of Health still uses DBF and DBC formats to Publicize data. This package was developed to help [PySUS](https://github.com/AlertaDengue/pysus) to extract data from these formats to more modern ones. Pyreaddbc can also be used to convert DBC files from any other source.
+**pyreaddbc** is a Python library for working with [DBase database file](https://docs.fileformat.com/database/dbf/). Legacy systems from the Brazilian Ministry of Health still uses DBF and DBC formats to Publicize data. This package was developed to help [PySUS](https://github.com/AlertaDengue/pysus) extract data from these formats into more modern ones. Pyreaddbc can also be used to convert DBC files from any other source."
 
 
 ## Installation
