@@ -1,17 +1,67 @@
-import gzip
 import os
 from pathlib import Path
+from tempfile import NamedTemporaryFile
 
-import chardet
 import pandas as pd
 import pytest
+from dbfread import DBF
 
-from pyreaddbc import dbc2dbf, dbf_to_csvgz, read_dbc, read_dbc_dbf
+from pyreaddbc import dbc2dbf
 
 path_root = Path(__file__).resolve().parent.parent
 data_files = path_root / "tests/data"
 
 
+def read_dbc(filename, encoding="utf-8", raw=False):
+    """
+    Opens a DBC file and returns its contents as a pandas DataFrame.
+
+    Parameters:
+        filename (str):
+            The name of the .dbc file.
+        encoding (str, optional):
+            The encoding of the data (default is "utf-8").
+        raw (bool, optional):
+            If True, skips type conversion to avoid
+                type conversion errors (default is False).
+
+    Returns:
+        pandas.DataFrame: A DataFrame containing the data from the DBC file.
+    """
+
+    if isinstance(filename, str):
+        filename = filename.encode()
+    with NamedTemporaryFile(delete=False) as tf:
+        dbc2dbf(filename, tf.name.encode())
+        try:
+            dbf = DBF(tf.name, encoding=encoding, raw=raw)
+            df = pd.DataFrame(list(dbf))
+        except ValueError:
+            dbf = DBF(tf.name, encoding=encoding, raw=not raw)
+            df = pd.DataFrame(list(dbf))
+    os.unlink(tf.name)
+    return df
+
+
+def read_dbc_dbf(filename: str) -> pd.DataFrame:
+    """
+    Read a DBC or DBF file and return its contents as a pandas DataFrame.
+
+    Parameters:
+        filename (str): The name of the file to read.
+
+    Returns:
+        pd.DataFrame: A DataFrame containing the data from the file.
+    """
+    if filename.endswith(("dbc", "DBC")):
+        df = read_dbc(filename, encoding="iso-8859-1")
+    elif filename.endswith(("DBF", "dbf")):
+        dbf = DBF(filename, encoding="iso-8859-1")
+        df = pd.DataFrame(list(dbf))
+    return df
+
+
+# DATASUS Databases
 db_tests = [
     "ZIKABR21",
     "STPI2206",
@@ -37,42 +87,6 @@ def test_dbc2dbf(db_test):
 
 
 @pytest.mark.parametrize("db_test", db_tests)
-def test_read_dbc_dbf(db_test):
-    dbc_file = str(data_files / f"{db_test}.dbc")
-    df = read_dbc_dbf(dbc_file)
-    assert_dataframe_valid(df)
-
-
-@pytest.mark.parametrize("db_test", db_tests)
-def test_dbf_to_csvgz(db_test):
-    temp_dbf_file = str(data_files / f"{db_test}.dbf")
-    temp_csvgz_file = str(data_files / f"{db_test}.csv.gz")
-    dbf_to_csvgz(temp_dbf_file, encoding='iso-8859-1')
-    assert os.path.isfile(temp_csvgz_file)
-    with gzip.open(temp_csvgz_file, "rt") as gzfile:
-        df = pd.read_csv(gzfile)
-    assert isinstance(df, pd.DataFrame)
-    assert not df.empty
-    assert len(df.columns) > 2
-    assert len(df) > 0
-
-
-@pytest.mark.parametrize("db_test", db_tests)
-@pytest.mark.skipif
-def test_encoding(db_test):
-    dbc_file = str(data_files / f"{db_test}.dbc")
-    common_encodings = [
-        'utf-8',
-        'iso-8859-1',
-        'cp1252',
-        'Windows-1252',
-    ]  # Add more if needed
-
-    detected_encoding = chardet.detect(open(dbc_file, 'rb').read())['encoding']
-    assert detected_encoding in common_encodings
-
-
-@pytest.mark.parametrize("db_test", db_tests)
 def test_dbc_file_header(db_test):
     dbc_file = data_files / f"{db_test}.dbc"
     with open(dbc_file, 'rb') as f:
@@ -92,7 +106,5 @@ def test_dbc_file_header(db_test):
 def assert_dataframe_valid(df):
     assert isinstance(df, pd.DataFrame)
     assert not df.empty
-    assert len(df.columns) > 0
-    assert len(df) > 0
     assert df.shape[0] > 0
     assert df.shape[1] > 0
