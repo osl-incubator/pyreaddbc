@@ -1,6 +1,7 @@
 # pyreaddbc
 
-**pyreaddbc** is a Python library for working with DBC (Dengue Brazilian Case Registry) and DBF (dBase) files. It is an extension used in the PySUS package, which provides access to Brazilian public health data. For more information, you can visit the [PySUS repository](https://github.com/AlertaDengue/pysus).
+**pyreaddbc** is a Python library for working with [DBase database file](https://docs.fileformat.com/database/dbf/). Legacy systems from the Brazilian Ministry of Health still uses DBF and DBC formats to Publicize data. This package was developed to help [PySUS](https://github.com/AlertaDengue/pysus) to extract data from these formats to more modern ones. Pyreaddbc can also be used to convert DBC files from any other source.
+
 
 ## Installation
 
@@ -11,6 +12,8 @@ pip install pyreaddbc
 ```
 
 ## Usage
+
+**Note**: *Extracting the DBF from a DBC may require to specify the encoding of the original data, if known.*
 
 ### Reading DBC Files
 
