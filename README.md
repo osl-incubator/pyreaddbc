@@ -83,6 +83,6 @@ of Mark Adler <madler@alumni.caltech.edu> (zlib/blast), Pablo Fonseca
 (https://github.com/eaglebh/blast-dbf).
 
 [PySUS](https://github.com/AlertaDengue/PySUS) has further extended and adapted this code to
-create **pyreaddbc**. The original work of Mark Adler and Pablo Fonseca.
+create **pyreaddbc**. The original work of Mark Adler and Pablo Fonseca is much appreciated for its contribution to this project.
 
 **Note**: *pyreaddbc* is maintained with funding from [AlertaDengue](https://github.com/AlertaDengue).
