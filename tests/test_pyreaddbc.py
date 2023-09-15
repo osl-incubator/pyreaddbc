@@ -2,7 +2,6 @@ import os
 from pathlib import Path
 from tempfile import NamedTemporaryFile
 
-# import chardet
 import pandas as pd
 import pytest
 from dbfread import DBF
